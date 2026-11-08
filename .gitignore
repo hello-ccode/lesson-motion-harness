@@ -1,4 +1,7 @@
 .DS_Store
+node_modules/
+.hyperframes/
+
 # 교과서 원문은 올리지 않는다 (형식 · 목차 · 예시 원고만 올림)
 /textbook/
 docs/textbook/*
