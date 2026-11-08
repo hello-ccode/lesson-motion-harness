@@ -12,7 +12,12 @@ docs/textbook/*
 # 영상 한 편 = out/ 폴더 하나. 교과서 원문이 들어 있어서 올리지 않는다
 out/
 
-# 레퍼런스 원본 영상은 남이 만든 영상이라 올리지 않는다 (분석 문서만 올림)
+# 레퍼런스 원본(영상 · 이미지)은 남이 만든 것이라 올리지 않는다 (분석 문서만 올림)
 references/**/*.mp4
 references/**/*.mov
 references/**/*.webm
+references/**/*.jpg
+references/**/*.jpeg
+references/**/*.png
+references/**/*.gif
+references/**/*.webp
