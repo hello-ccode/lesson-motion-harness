@@ -5,3 +5,11 @@ docs/textbook/*
 !docs/textbook/_format.md
 !docs/textbook/index.md
 !docs/textbook/sample-unit.md
+
+# 영상 한 편 = out/ 폴더 하나. 교과서 원문이 들어 있어서 올리지 않는다
+out/
+
+# 레퍼런스 원본 영상은 남이 만든 영상이라 올리지 않는다 (분석 문서만 올림)
+references/**/*.mp4
+references/**/*.mov
+references/**/*.webm
