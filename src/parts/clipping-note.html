@@ -1,0 +1,40 @@
+<!doctype html>
+<!--
+  src/parts/clipping-note.html — 오려 붙인 기사 조각 (개념 정의 · 교과서 문장)
+  크기: 폭 1100 · 높이 자동. paper-ground 위에 살짝 기울여 얹는다 (rotate -1.5° ~ 1.5°)
+  바꾸는 부분: #clipping-note-kicker(작은 머리말: 용어 · 분류) · #clipping-note-title(용어, 명조 굵게)
+              #clipping-note-body(정의, 교과서 문장 그대로 · 두세 줄) · #clipping-note-source(교과서 쪽수, 비우지 않음)
+              강조 낱말은 <span class="hl"><span class="hl-ink"></span>낱말</span> (한 조각에 한 군데)
+  건드리지 않는 것: 조각 가장자리(톱니처럼 오린 모양) · 그림자 · 단 나눔 선
+  따로 움직일 수 있는 조각: #clipping-note(조각 전체) · #clipping-note-title · #clipping-note-body 의 .line(줄마다) · .hl-ink(형광펜, 왼쪽 기준)
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>clipping-note</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body { padding: 30px; }
+  #clipping-note { position: relative; width: 1100px; box-sizing: border-box; padding: 56px 64px 44px;
+    background: #f1eee6 url("../assets/textures/paper.jpg") 30% 40% / 1400px auto;
+    filter: drop-shadow(0 18px 22px rgba(30,25,20,0.28));
+    clip-path: polygon(0% 1.2%, 4% 0%, 9% 1%, 15% 0.2%, 22% 1.1%, 30% 0.1%, 38% 0.9%, 46% 0%, 55% 1.2%, 63% 0.2%, 71% 1%, 80% 0%, 88% 1.1%, 95% 0.2%, 100% 1%,
+      99.4% 20%, 100% 41%, 99.2% 63%, 100% 84%, 99.5% 100%, 92% 99%, 84% 100%, 75% 98.9%, 66% 100%, 57% 99.1%, 48% 100%, 39% 98.9%, 30% 100%, 21% 99%, 12% 100%, 5% 99%, 0% 100%, 0.6% 78%, 0% 55%, 0.7% 31%); }
+  #clipping-note-kicker { font-family: var(--font-sans); font-size: var(--text-label); font-weight: 700; color: var(--color-rule); letter-spacing: 0.06em; }
+  #clipping-note-title { margin-top: 8px; padding-bottom: 18px; border-bottom: var(--rule-thin) double var(--color-ink);
+    font-size: var(--text-title); line-height: 1.15; font-weight: 900; letter-spacing: -0.02em; }
+  #clipping-note-body { margin-top: 26px; font-size: var(--text-body); line-height: 1.6; font-weight: 400; }
+  .hl { position: relative; display: inline-block; isolation: isolate; }
+  .hl-ink { position: absolute; left: -6px; right: -6px; top: 20%; bottom: 6%; background: var(--color-highlight); mix-blend-mode: multiply; transform-origin: 0 50%; border-radius: 4px 10px 6px 12px; z-index: -1; }
+  #clipping-note-source { margin-top: 22px; text-align: right; font-size: var(--text-label); color: var(--color-ink-soft); }
+</style>
+</head>
+<body>
+  <div id="clipping-note">
+    <p id="clipping-note-kicker">용어</p>
+    <h2 id="clipping-note-title">주기율표</h2>
+    <p id="clipping-note-body"><span class="mask"><span class="line">성질이 비슷한 원소가 같은 세로줄에 오도록</span></span><span class="mask"><span class="line">원소를 <span class="hl"><span class="hl-ink"></span>원자 번호 순서</span>로 배열한 표</span></span></p>
+    <p id="clipping-note-source">교과서 p.00</p>
+  </div>
+</body>
+</html>

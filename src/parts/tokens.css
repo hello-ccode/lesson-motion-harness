@@ -1,0 +1,52 @@
+/*
+  src/parts/tokens.css — 모든 부품이 같이 쓰는 토큰 (값의 출처: docs/design.md)
+  룩: 신문 다큐멘터리 (구겨진 신문지 · 흑백 사진 · 명조 헤드라인 · 빨간 줄 · 형광펜)
+  기준: 1920×1080 영상 px. 강조색을 바꾸려면 --color-rule / --color-highlight 두 줄만 바꾼다.
+*/
+@font-face { font-family: "NotoSerifKR"; font-weight: 200 900; src: url("../assets/fonts/NotoSerifKR-VF.woff2") format("woff2"); }
+@font-face { font-family: "Pretendard"; font-weight: 400; src: url("../assets/fonts/Pretendard-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Pretendard"; font-weight: 600; src: url("../assets/fonts/Pretendard-SemiBold.woff2") format("woff2"); }
+@font-face { font-family: "Pretendard"; font-weight: 700; src: url("../assets/fonts/Pretendard-Bold.woff2") format("woff2"); }
+
+:root {
+  /* 1. 색 */
+  --color-paper: #e8e4db;        /* 신문지 */
+  --color-paper-shade: #c9c3b6;  /* 신문지 그늘 · 접힌 자국 */
+  --color-ink: #1d1d1b;          /* 잉크: 헤드라인 · 본문 · 사진 틀 */
+  --color-ink-soft: #4a4844;      /* 이름 · 부제 · 쪽수 · 작은 설명 */
+  --color-ink-faint: #8a867e;     /* 장식 전용 (십자표 등) — 읽는 글자에 쓰지 않음 */
+  --color-rule: #c0322b;         /* 빨간 줄 · 도장 */
+  --color-highlight: #cdeb3a;    /* 형광펜 */
+  --color-on-photo: #f4f1ea;     /* 사진 위 글자 */
+  --color-tag: #111111;          /* 라벨 바탕 */
+  --color-on-tag: #ffffff;       /* 라벨 글자 */
+
+  /* 2. 글자 */
+  --font-serif: "NotoSerifKR", serif;     /* 헤드라인 · 본문 · 이름 */
+  --font-sans: "Pretendard", sans-serif;  /* 연도 숫자 · 라벨 */
+  --text-masthead: 300px;  /* 화면을 넘치는 헤드라인 (잘려 보이는 것이 정상) */
+  --text-year: 220px;      /* 연도 숫자 */
+  --text-title: 96px;      /* 제목 (명조 굵게) */
+  --text-name: 72px;       /* 사진 옆 이름 */
+  --text-lead: 56px;       /* 형광펜 문장 */
+  --text-body: 44px;       /* 본문 · 정의 */
+  --text-label: 32px;      /* 라벨 · 출처 (최소 크기) */
+
+  /* 4. 크기 */
+  --rule-thick: 14px;      /* 빨간 줄 */
+  --rule-thin: 4px;        /* 짧은 검정 줄 */
+  --dot-gap: 14px;         /* 점선 간격 */
+  --space-16: 16px; --space-24: 24px; --space-32: 32px; --space-48: 48px; --space-64: 64px; --space-96: 96px;
+
+  /* 5. 질감 세기 */
+  --newsprint-opacity: 0.32;  /* 뒤 신문 글자 */
+  --newsprint-blur: 2.5px;      /* 뒤 신문 글자 흐림 (초점 밖) */
+  --grain-opacity: 0.35;      /* 필름 그레인 */
+}
+
+html, body { margin: 0; background: transparent; }
+body { font-family: var(--font-serif); color: var(--color-ink); -webkit-font-smoothing: antialiased; }
+p, h1, h2, h3 { margin: 0; }
+/* 글줄 등장(mask-rise)용 구조: .mask가 자르고 .line만 움직인다 */
+.mask { display: block; overflow: hidden; }
+.line { display: block; }

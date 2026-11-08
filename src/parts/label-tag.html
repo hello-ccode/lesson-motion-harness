@@ -1,0 +1,22 @@
+<!doctype html>
+<!--
+  src/parts/label-tag.html — 검정 라벨 (과목 · 단원 · 장 번호)
+  크기: 글자에 맞춤 · 높이 58. 자리: 화면 왼쪽 아래 (left 60, bottom 60) 고정
+  바꾸는 부분: #label-tag-text (한 줄, 20자 이내)
+  건드리지 않는 것: 검정 바탕 · 흰 굵은 고딕 · 자리
+  따로 움직일 수 있는 조각: #label-tag
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>label-tag</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  #label-tag { display: inline-block; padding: 10px 22px; background: var(--color-tag); color: var(--color-on-tag);
+    font-family: var(--font-sans); font-size: var(--text-label); line-height: 1.2; font-weight: 700; letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+  <div id="label-tag"><span id="label-tag-text">CHAPTER 01 · 주기율표</span></div>
+</body>
+</html>
