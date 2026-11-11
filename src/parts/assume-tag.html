@@ -1,0 +1,40 @@
+<!doctype html>
+<!--
+  src/parts/assume-tag.html — "가정" 표지 + 조건 한 줄 (docs/video.md 5-3 · 6-2)
+  크기: 1920×1080, 투명 (가정한 숫자가 있는 부품 위에 얹는다)
+  모양: subject-label과 같은 작은 종이표(위 · 아래 변이 잘게 찢김, color-tag) 안에 "가정" 두 글자. 오른쪽에 조건 한 줄.
+  바꾸는 부분: #at-cond 의 글 (조건 한 줄. 예: "연 7%, 매달 복리". 수업 자료 표기 그대로, video.md 5-2) · #assume-tag 의 data-slot
+  자리 (data-slot):
+    "bottom"       (기본) left 160px · 위 940px. material-card · definition-note 위에 얹을 때(출처 줄은 쪽지 안이라 겹치지 않음)
+    "above-number" left 258px · 위 676px. period-number 위에 얹을 때(부제 위, 큰 숫자와 같은 왼쪽 줄)
+    band-title 위에는 얹지 않는다(출처 줄 · 문장과 겹침)
+  건드리지 않는 것: 글자 크기 32px(최소 글자, text-source) · "가정" 글자색 color-ink(종이표 위라서 ink-soft를 쓰지 않는다, video.md 2장) · 한 화면에 하나
+  따로 움직일 수 있는 조각: #at-tag-wrap(숫자가 나온 뒤 한 번 툭, 그 뒤로 움직이지 않는다) · #at-cond
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>assume-tag</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  #assume-tag { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+  #at-row { position: absolute; left: var(--safe-x); top: 940px; display: flex; align-items: center; gap: 20px; }
+  #assume-tag[data-slot="above-number"] #at-row { left: 258px; top: 676px; }
+  #at-tag-wrap { filter: drop-shadow(0 4px 6px rgba(40, 24, 8, 0.28)); }
+  #at-tag { background: var(--color-tag); padding: 12px 26px; }
+  #at-label { font: 700 var(--text-source)/1 var(--font-sans); color: var(--color-ink); white-space: nowrap; }
+  #at-cond { font: 600 var(--text-source)/1 var(--font-sans); color: var(--color-ink-soft); white-space: nowrap; }
+</style>
+</head>
+<body>
+  <div id="assume-tag" data-slot="bottom">
+    <div id="at-row">
+      <div id="at-tag-wrap">
+        <div id="at-tag" data-torn="top bottom" data-torn-amp="4" data-torn-step="8" data-seed="71"><p id="at-label">가정</p></div>
+      </div>
+      <p id="at-cond">연 7%, 매달 복리</p>
+    </div>
+  </div>
+<script src="paper-kit.js"></script>
+</body>
+</html>

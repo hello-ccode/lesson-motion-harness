@@ -1,0 +1,62 @@
+<!doctype html>
+<!--
+  src/parts/bg-paper.html — 바탕 (역할 칸: 바탕)
+  크기: 2000×1160 (영상보다 사방 40px 크게 — 카메라가 움직여도 가장자리가 안 보임). 화면 기준 left/top -40px.
+  모양: 크림 종이 한 장이 화면을 덮고, 왼쪽 위 · 오른쪽 아래 모서리만 찢겨서 그 아래 망점 종이 조각(남색 · 빨강 · 겨자)이 보인다.
+        종이 결은 직접 만든 잡음(.paper-grain). 레퍼런스 사진 · 종이 이미지를 잘라 쓰지 않는다.
+  바꾸는 부분: 없음 (모든 장면이 같은 바탕). 장면에 따라 조각 색만 바꾸려면 .bg-strip 의 class(ht-red / ht-mustard / ht-navy-dense)만 바꾼다.
+  건드리지 않는 것: 크림 종이 색(--color-bg) · 찢은 모서리 위치(화면 안쪽 글자 자리를 가리지 않도록 모서리 18% 안쪽에만) · 종이 결 세기
+  따로 움직일 수 있는 조각: #bg-sheet-wrap(크림 종이 전체) · #bg-strip-tl-1, #bg-strip-tl-2(왼쪽 위 조각) · #bg-strip-br-1, #bg-strip-br-2(오른쪽 아래 조각)
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>bg-paper</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  #bg-paper { position: absolute; left: -40px; top: -40px; width: 2000px; height: 1160px; overflow: hidden; background: var(--color-halftone-navy); }
+  #bg-under { position: absolute; inset: 0; }
+  .bg-strip { position: absolute; inset: 0; }
+  #bg-sheet-wrap { position: absolute; inset: 0; filter: drop-shadow(0 6px 8px rgba(40, 24, 8, 0.35)); }
+  #bg-rim, #bg-sheet { position: absolute; inset: 0; }
+  #bg-rim { background: var(--color-paper-rim); }
+  #bg-sheet { background: var(--color-bg); }
+</style>
+</head>
+<body>
+  <div id="bg-paper">
+    <div id="bg-under" class="ht-navy-dense"></div>
+    <div id="bg-strip-tl-1" class="bg-strip ht-navy"></div>
+    <div id="bg-strip-tl-2" class="bg-strip ht-red"></div>
+    <div id="bg-strip-br-1" class="bg-strip ht-mustard"></div>
+    <div id="bg-strip-br-2" class="bg-strip ht-red"></div>
+    <div id="bg-sheet-wrap">
+      <div id="bg-rim"></div>
+      <div id="bg-sheet"><div class="paper-grain"></div></div>
+    </div>
+  </div>
+<script src="paper-kit.js"></script>
+<script>
+  (function () {
+    // 2000×1160 판 기준 좌표. 모서리 찢은 선 = 대각선 (316.9초 프레임의 비스듬한 찢김)
+    const W = 2000, H = 1160;
+    const set = (id, pts, torn, seed, amp, step) =>
+      document.getElementById(id).style.clipPath = Kit.tornPath(pts, torn, { seed, amp: amp || 16, step: step || 16 });
+    // 조각: 찢은 선과 나란한 대각선 띠. d=1이 종이 찢은 선, d가 작을수록 모서리 쪽.
+    // 찢은 선 바로 아래 = 연한 망점, 그 안쪽 = 빨강/겨자 망점, 맨 모서리 = 진한 남색(#bg-under)
+    const TL = [560, 380], BR = [600, 400];
+    const bandTL = (d1, d2) => [[TL[0] * d1, 0], [TL[0] * d2, 0], [0, TL[1] * d2], [0, TL[1] * d1]];
+    const bandBR = (d1, d2) => [[W, H - BR[1] * d1], [W, H - BR[1] * d2], [W - BR[0] * d2, H], [W - BR[0] * d1, H]];
+    const both = [false, true, false, true];
+    set("bg-strip-tl-1", bandTL(0.78, 1.1), both, 11, 18, 16);
+    set("bg-strip-tl-2", bandTL(0.42, 0.8), both, 12, 18, 16);
+    set("bg-strip-br-1", bandBR(0.75, 1.1), both, 13, 18, 16);
+    set("bg-strip-br-2", bandBR(0.40, 0.77), both, 14, 18, 16);
+    // 하얀 섬유 가장자리(rim)는 종이보다 12px 바깥
+    const sheet = (o) => [[TL[0] - o, 0], [W, 0], [W, H - BR[1] + o], [W - BR[0] + o, H], [0, H], [0, TL[1] - o]];
+    set("bg-rim", sheet(12), [false, false, true, false, false, true], 21, 14, 14);
+    set("bg-sheet", sheet(0), [false, false, true, false, false, true], 22, 12, 12);
+  })();
+</script>
+</body>
+</html>

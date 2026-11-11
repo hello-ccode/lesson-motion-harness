@@ -1,0 +1,95 @@
+/*
+  src/parts/tokens.css — 모든 부품이 같이 쓰는 토큰 (값의 출처: docs/design.md)
+  룩: 크림 종이 콜라주 (크림 종이 · 찢은 가장자리 · 망점 · 짙은 남색 글자 · 주황 점 · 빨간 손그림 동그라미)
+  레퍼런스: references/cream-collage/ (6장)
+  기준: 1920×1080 영상 px. 색을 바꿀 때는 이 파일의 :root만 고친다. 부품 html 안에 색 값을 직접 쓰지 않는다.
+*/
+@font-face { font-family: "NotoSerifKR"; font-weight: 200 900; src: url("../assets/fonts/NotoSerifKR-VF.woff2") format("woff2"); }
+@font-face { font-family: "Pretendard"; font-weight: 400; src: url("../assets/fonts/Pretendard-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Pretendard"; font-weight: 600; src: url("../assets/fonts/Pretendard-SemiBold.woff2") format("woff2"); }
+@font-face { font-family: "Pretendard"; font-weight: 700; src: url("../assets/fonts/Pretendard-Bold.woff2") format("woff2"); }
+
+:root {
+  /* 1. 색 */
+  --color-bg: #f6ead3;            /* 크림 종이 바탕 (선생님 결정: 더 밝게) */
+  --color-paper-light: #fcf6e8;   /* 위에 붙인 종이 쪽지 · 라벨 */
+  --color-paper-shade: #d5bd9e;   /* 종이 그늘 · 자리 표시 칸 */
+  --color-paper-rim: #fbf3e3;     /* 찢은 가장자리의 하얀 섬유 */
+  --color-tag: #d3be89;           /* 과목 · 단원 라벨 종이 */
+  --color-ink: #0f2639;           /* 짙은 남색: 제목 · 본문 · 숫자 · 선 */
+  --color-ink-soft: #4a5866;      /* 보조 글자 · 출처 (크림 바탕 대비 5.5:1) */
+  --color-accent: #fe8733;        /* 주황 점 (시간선 위) — 글자에 쓰지 않음 */
+  --color-highlight: #e5484d;     /* 빨간 손그림 동그라미 — 글자에 쓰지 않음 */
+  --color-band: #0b243f;          /* 가로 띠 */
+  --color-on-band: #f6ead3;       /* 띠 안 글자 */
+  --color-halftone-navy: #0b243f; /* 망점 조각 3색 (바탕 가장자리 전용) */
+  --color-halftone-red: #a6200a;
+  --color-halftone-mustard: #e89c15;
+
+  /* 2. 글자 */
+  --font-sans: "Pretendard", sans-serif;  /* 띠 글자 · 숫자 · 본문 · 라벨 */
+  --font-serif: "NotoSerifKR", serif;     /* 쪽지 제목 */
+  --text-band: 185px;      /* 가로 띠 안 큰 글자 */
+  --text-end: 96px;        /* 끝 화면 정리 문장 (docs/video.md 1-1 · 6-2) */
+  --text-number: 140px;    /* 기간 · 금액 큰 숫자 */
+  --text-verdict: 140px;   /* 판정 짧은 말 */
+  --text-headline: 120px;  /* 쪽지 제목 (명조 아주 굵게) */
+  --text-title: 72px;      /* 자료 이름 */
+  --text-lead: 56px;       /* 강조 문장 · 표 숫자 */
+  --text-body: 44px;       /* 읽는 글 */
+  --text-label: 40px;      /* 과목 · 단원 라벨 */
+  --text-source: 32px;     /* 출처 · 쪽수 (최소 크기) */
+
+  /* 4. 크기 · 자리 */
+  --safe-x: 160px;         /* 왼쪽 · 오른쪽 여백 */
+  --safe-y: 64px;          /* 위 여백 */
+  --band-inset: 65px;      /* 띠 좌우 여백 */
+  --band-top: 366px;       /* 띠 위쪽 */
+  --band-height: 289px;    /* 띠 높이 */
+  --band-gap: 680px;       /* 띠 글자 왼쪽 반 · 오른쪽 반 사이 (가운데 물체 자리) */
+  --object-size: 700px;    /* 띠 가운데 물체 지름 */
+  --timeline-x: 160px;     /* 세로선 자리 */
+  --timeline-y: 1004px;    /* 가로 시간선 높이 */
+  --line-thick: 5px;       /* 시간선 · 화살표 굵기 */
+  --dot-size: 38px;        /* 주황 점 지름 */
+  --ring-stroke: 6px;      /* 빨간 동그라미 선 */
+  --ring-pad-x: 26px;      /* 동그라미와 글자 사이 좌우 여유 */
+  --ring-pad-y: 14px;      /* 위아래 여유 */
+  --space-16: 16px; --space-24: 24px; --space-32: 32px; --space-48: 48px; --space-64: 64px; --space-96: 96px;
+
+  /* 5. 질감 */
+  --halftone-pitch: 10px;  /* 망점 간격 */
+  --grain-opacity: 0.35;   /* 종이 결 */
+}
+
+html, body { margin: 0; background: transparent; }
+body { font-family: var(--font-sans); color: var(--color-ink); -webkit-font-smoothing: antialiased; }
+p, h1, h2, h3, table { margin: 0; }
+
+/* 망점: 점 크기로 진하기를 조절한다. 바탕 가장자리 조각에만 쓴다 */
+.ht-navy    { background: radial-gradient(circle, var(--color-halftone-navy) 0 44%, transparent 47%) 0 0 / var(--halftone-pitch) var(--halftone-pitch), var(--color-paper-rim); }
+.ht-navy-dense { background: radial-gradient(circle, var(--color-paper-rim) 0 16%, transparent 19%) 0 0 / var(--halftone-pitch) var(--halftone-pitch), var(--color-halftone-navy); }
+.ht-red     { background: radial-gradient(circle, var(--color-halftone-red) 0 46%, transparent 49%) 0 0 / var(--halftone-pitch) var(--halftone-pitch), var(--color-paper-rim); }
+.ht-mustard { background: radial-gradient(circle, var(--color-halftone-mustard) 0 46%, transparent 49%) 0 0 / var(--halftone-pitch) var(--halftone-pitch), var(--color-paper-rim); }
+
+/* 종이 결: 직접 만든 잡음 (레퍼런스 이미지를 잘라 쓰지 않음) */
+.paper-grain { position: absolute; inset: 0; pointer-events: none; opacity: var(--grain-opacity); mix-blend-mode: multiply;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='1' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.25  0 0 0 0 0.17  0 0 0 0 0.08  0 0 0 -24 6.6'/></filter><rect width='100%' height='100%' filter='url(&quot;%23s&quot;)'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='360' height='360'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.42  0 0 0 0 0.30  0 0 0 0 0.16  0 0 0 0.35 0'/></filter><rect width='100%' height='100%' filter='url(&quot;%23g&quot;)'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2000' height='1160'><filter id='m'><feTurbulence type='fractalNoise' baseFrequency='0.004' numOctaves='2' seed='9'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.42  0 0 0 0 0.25  0 0 0 0.22 0'/></filter><rect width='100%' height='100%' filter='url(&quot;%23m&quot;)'/></svg>");
+}
+
+/* 빨간 손그림 동그라미: 부품마다 svg 한 장 (.ring-layer) 안에 path. 모양은 paper-kit.js Kit.ring 이 그린다 */
+.ring-layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; pointer-events: none; }
+[data-ring] { display: inline-block; margin: 0 40px; } /* 동그라미가 앞뒤 글자를 가로지르지 않게 여유 (28 → 40: 긴 낱말에서 동그라미 끝이 앞 글자에 7px까지 붙었음) */
+.ring-layer path { fill: none; stroke: var(--color-highlight); stroke-width: var(--ring-stroke); stroke-linecap: round; }
+
+/* 그림 자리 (시계 · 동전 등은 나중에 따로 만든다). 자리만 보여 주는 점선 칸 */
+.art-slot { position: absolute; display: flex; align-items: center; justify-content: center; text-align: center;
+  background: var(--color-paper-shade); border: 6px dashed var(--color-ink-soft); box-sizing: border-box;
+  font: 600 var(--text-source)/1.3 var(--font-sans); color: var(--color-ink); }
+
+/* 글줄 등장용 구조: .mask가 자르고 .line만 움직인다 */
+.mask { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.line { display: inline-block; }

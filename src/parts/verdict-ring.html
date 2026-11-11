@@ -1,0 +1,35 @@
+<!doctype html>
+<!--
+  src/parts/verdict-ring.html — 판정 · 강조 짧은 말 (역할 칸: 판정 · 강조)
+  크기: 1920×1080, 투명 (다른 부품 위에 얹는 맨 위 층)
+  모양: 짙은 남색 아주 굵은 짧은 말(2~6글자) 하나를 살짝 기울이고, 빨간 손그림 동그라미로 감싼다.
+        (기울인 굵은 말 = 카톡영상_종이질감 316.9초 · 568.7초 · 946.6초의 붓글씨 강조어 느낌을 Pretendard Bold 기울임으로 대신.
+         동그라미 = 선생님 결정: 1주차 영상과 같은 빨간 손그림 타원)
+  바꾸는 부분: #vr-word 의 글자 (자료에 있는 6글자 안쪽 말. 예: "이자의 이자") · #verdict-ring 의 data-slot (지금은 "top" 하나)
+  자리 (docs/video.md 4-2. 과목 라벨(y 65~148)과 다른 부품 글자를 피한다):
+    data-slot="top"  (기본) 글자 가운데 (1360, 300). 동그라미 y 약 177~417. 판정만 있는 화면 · 판정이 주인 부품인 화면. 글자는 6글자까지
+    (11/9: material-card 위에 얹는 "left" 자리는 뺐다. 표를 키워 카드가 x 560px부터라 왼쪽 칸이 이름 · 화살표로 찬다)
+  건드리지 않는 것: 글자 크기(140px) · 기울기(-8도) · 동그라미 선(6px)과 여유(좌우 26px, 위아래 14px) · 한 화면에 하나만
+                  · 판정을 얹은 화면에서는 그 아래 부품의 동그라미를 켜지 않는다(동그라미는 한 화면에 한 군데, video.md 3-4)
+  따로 움직일 수 있는 조각: #vr-word(톡 튀어나오듯) · #vr-ring(그려지듯)
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>verdict-ring</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  #verdict-ring { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+  #vr-word { position: absolute; left: 1360px; top: 300px; transform: translate(-50%, -50%);
+    font: 700 var(--text-verdict)/1 var(--font-sans); color: var(--color-ink); white-space: nowrap; letter-spacing: -0.02em; }
+  #vr-word span { display: inline-block; transform: skewX(-8deg); }
+</style>
+</head>
+<body>
+  <div id="verdict-ring" data-slot="top">
+    <div id="vr-word"><span data-ring="vr-ring">이자의 이자!</span></div>
+    <svg class="ring-layer" viewBox="0 0 1920 1080"><path id="vr-ring"/></svg>
+  </div>
+<script src="paper-kit.js"></script>
+</body>
+</html>

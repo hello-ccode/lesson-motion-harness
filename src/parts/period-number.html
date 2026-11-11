@@ -1,0 +1,42 @@
+<!doctype html>
+<!--
+  src/parts/period-number.html — 기간 · 금액 숫자 (역할 칸: 연도 · 시대)
+  크기: 1920×1080, 투명 (bg-paper 위에 얹는다)
+  모양: 화면 왼쪽 세로선(바탕이 찢긴 왼쪽 위 모서리 아래 y 330px부터)이 아래에서 둥글게 꺾여 가로 시간선이 되고(오른쪽 아래 찢긴 모서리 앞 x 1480px까지), 시간선 위에 주황 점 하나.
+        큰 숫자는 왼쪽 아래, 시간선 바로 위. 부제 한 줄은 숫자 위. (vox_연도표기_13초의 구도, 색은 크림 바탕용으로 남색)
+  바꾸는 부분: #pn-number 안의 .digit(숫자 한 글자씩) · .unit(단위: 년 뒤 / 만 원 등, 숫자보다 작게) · #pn-sub(부제 한 줄, 비워도 됨)
+              #pn-dot 의 left (시간선 위 점 위치: 기간이 길어질수록 오른쪽으로. 기본 373px)
+  건드리지 않는 것: 숫자 자리(left 258px, 아랫줄 943px) · 시간선 높이(1004px)와 굵기(5px) · 점 크기(38px) · 숫자 글꼴(Pretendard SemiBold 140px)
+  따로 움직일 수 있는 조각: #pn-frame(세로선+시간선, 그려지듯 등장) · #pn-dot(점: 시간선을 따라 이동) · .digit(한 자리씩 바뀜) · .unit · #pn-sub 의 .line
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>period-number</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  #period-number { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+  #pn-frame { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+  #pn-frame path { fill: none; stroke: var(--color-ink); stroke-width: var(--line-thick); stroke-linecap: round; }
+  #pn-dot { position: absolute; left: 373px; top: var(--timeline-y); width: var(--dot-size); height: var(--dot-size);
+    margin: calc(var(--dot-size) / -2) 0 0 calc(var(--dot-size) / -2); border-radius: 50%; background: var(--color-accent);
+    box-shadow: 0 0 0 5px var(--color-bg); }
+  #pn-text { position: absolute; left: 258px; bottom: calc(1080px - 943px); }
+  #pn-sub { font: 600 var(--text-lead)/1.2 var(--font-sans); color: var(--color-ink-soft); margin-bottom: var(--space-16); }
+  #pn-number { font: 600 var(--text-number)/0.8 var(--font-sans); color: var(--color-ink); letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .digit { display: inline-block; }
+  .unit { display: inline-block; font-size: 0.6em; letter-spacing: 0; margin-left: 0.12em; }
+</style>
+</head>
+<body>
+  <div id="period-number">
+    <svg id="pn-frame" viewBox="0 0 1920 1080"><path d="M160 330 L160 978 Q160 1004 186 1004 L1480 1004"/></svg>
+    <div id="pn-text">
+      <p id="pn-sub"><span class="mask"><span class="line">2년 뒤 · 복리</span></span></p>
+      <div id="pn-number"><span class="digit">1</span><span class="digit">2</span><span class="digit">1</span><span class="unit">만 원</span></div>
+    </div>
+    <div id="pn-dot"></div>
+  </div>
+</body>
+</html>

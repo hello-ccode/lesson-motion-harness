@@ -1,0 +1,47 @@
+<!doctype html>
+<!--
+  src/parts/definition-note.html — 정의 · 법칙 · 정리 쪽지 (역할 칸: 정의 · 사료 · 정리)
+  크기: 1920×1080, 투명 (bg-paper 위에 얹는다)
+  모양: 왼쪽에 위 · 아래 변이 잘게 찢긴 밝은 종이 쪽지. 맨 위에 명조 아주 굵은 제목, 아래에 뜻 · 식 · 예 몇 줄.
+        (카톡영상_종이질감_946.6초 · 568.7초의 제목 쪽지: 밝은 종이 + 짙은 남색 명조 제목)
+        강조 표시는 빨간 손그림 동그라미 한 군데.
+  바꾸는 부분: #dn-head(용어 · 법칙 이름, 한 줄) · #dn-key(뜻이나 식 한 줄, [data-ring] 한 군데) · #dn-body 의 줄(0~3줄, 수업 자료 그대로)
+              #dn-source(출처: 수업 자료 슬라이드 번호). 쪽지 높이는 줄 수에 맞춰 저절로 늘어난다
+  건드리지 않는 것: 쪽지 자리(left 160px, top 224px, 너비 1180px. 왼쪽 위 모서리가 바탕의 찢긴 선 안쪽에 오도록 170 → 224px) · 제목 글꼴(노토 세리프 KR 900, 120px) · 종이색 · 동그라미 모양
+  따로 움직일 수 있는 조각: #dn-note-wrap(쪽지) · #dn-head 의 .line · #dn-key · #dn-body 의 p(줄마다) · #dn-ring(그려지듯) · #dn-source
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>definition-note</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  #definition-note { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+  #dn-note-wrap { position: absolute; left: var(--safe-x); top: 224px; width: 1180px; filter: drop-shadow(0 8px 10px rgba(40, 24, 8, 0.30)); }
+  #dn-note { position: relative; background: var(--color-paper-light); padding: 72px 90px 64px; box-sizing: border-box; }
+  #dn-head { font: 900 var(--text-headline)/1.1 var(--font-serif); color: var(--color-ink); letter-spacing: -0.02em; }
+  #dn-key { margin-top: var(--space-48); font: 700 var(--text-lead)/1.3 var(--font-sans); color: var(--color-ink); }
+  #dn-body { margin-top: var(--space-32); }
+  #dn-body p { font: 400 var(--text-body)/1.5 var(--font-sans); color: var(--color-ink); font-variant-numeric: tabular-nums; }
+  #dn-body b { font-weight: 700; }
+  #dn-source { margin-top: var(--space-32); font: 600 var(--text-source)/1 var(--font-sans); color: var(--color-ink-soft); }
+</style>
+</head>
+<body>
+  <div id="definition-note">
+    <div id="dn-note-wrap">
+      <div id="dn-note" data-torn="top bottom" data-torn-amp="7" data-torn-step="10" data-seed="41">
+        <h2 id="dn-head"><span class="mask"><span class="line">72의 법칙</span></span></h2>
+        <p id="dn-key">72 ÷ 이자율 = <span data-ring="dn-ring">두 배까지 걸리는 해</span></p>
+        <div id="dn-body">
+          <p>1년에 6% → 72 ÷ 6 = <b>12년</b></p>
+          <p>1년에 3% → 72 ÷ 3 = <b>24년</b></p>
+        </div>
+        <p id="dn-source">수업 자료 슬라이드17</p>
+      </div>
+    </div>
+    <svg class="ring-layer" viewBox="0 0 1920 1080"><path id="dn-ring"/></svg>
+  </div>
+<script src="paper-kit.js"></script>
+</body>
+</html>

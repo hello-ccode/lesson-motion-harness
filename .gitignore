@@ -21,3 +21,13 @@ references/**/*.jpeg
 references/**/*.png
 references/**/*.gif
 references/**/*.webp
+
+# bkit 플러그인이 세션마다 만드는 폴더
+.bkit/
+
+# 내 컴퓨터에만 있는 설정 (경로 등)
+CLAUDE.local.md
+
+# HyperFrames 설치본 등 외부 스킬은 올리지 않는다 (skills-lock.json 으로 다시 받는다: npx skills add heygen-com/hyperframes)
+.claude/skills/*
+!.claude/skills/make-video/

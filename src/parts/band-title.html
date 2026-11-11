@@ -1,0 +1,57 @@
+<!doctype html>
+<!--
+  src/parts/band-title.html — 가로 띠 제목 + 강조 문장 (역할 칸: 제목 + 강조 문장)
+  크기: 1920×1080, 투명 (bg-paper 위에 얹는다)
+  모양: 화면 가운데 가로 띠(짙은 남색 + 옅은 망점) 안에 아주 굵은 크림색 글자. 글자는 왼쪽 반 · 오른쪽 반으로 나뉘고,
+        가운데 물체(그림 자리)가 두 반의 안쪽 끝을 조금씩 가린다. (70억의선택_인트로_글자배치의 구도. 띠 색은 크림 바탕에 맞춰 남색으로 바꿈)
+        띠 아래에 수업 자료 한 문장 + 빨간 손그림 동그라미 한 군데.
+  바꾸는 부분: #bt-left · #bt-right (띠 글자 왼쪽 반 · 오른쪽 반. 한 단어면 글자 사이에서 나눈다: "복" / "리")
+              #bt-object (가운데 그림 자리 — 지금은 점선 칸. 나중에 시계 그림 img로 바꾼다)
+              #bt-sentence 의 문장과 [data-ring] 이 붙은 span(동그라미 칠 곳 한 군데) · #bt-source(출처: 수업 자료 슬라이드 번호)
+              글자가 길면 --band-gap(왼쪽·오른쪽 반 사이)만 줄인다. 글자 크기는 줄이지 않는다
+  건드리지 않는 것: 띠 자리와 높이(위 366px, 높이 289px, 좌우 65px 여백) · 띠 글자 크기(Pretendard Bold 185px) · 층 순서(띠 < 글자 < 물체)
+  따로 움직일 수 있는 조각: #bt-band(띠: 옆에서 펼쳐지듯) · #bt-left · #bt-right(글자 반쪽씩) · #bt-object(물체: 띠 뒤에서 앞으로)
+                         · #bt-sentence 의 .line · #bt-ring(동그라미: 그려지듯)
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>band-title</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  #band-title { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+  #bt-band { position: absolute; left: var(--band-inset); right: var(--band-inset); top: var(--band-top); height: var(--band-height);
+    background: radial-gradient(circle, rgba(246, 234, 211, 0.10) 0 30%, transparent 34%) 0 0 / var(--halftone-pitch) var(--halftone-pitch), var(--color-band); }
+  .bt-half { position: absolute; top: var(--band-top); height: var(--band-height); display: flex; align-items: center;
+    font: 700 var(--text-band)/1 var(--font-sans); color: var(--color-on-band); letter-spacing: -0.02em; white-space: nowrap; }
+  #bt-left { right: calc(50% + var(--band-gap) / 2); }
+  #bt-right { left: calc(50% + var(--band-gap) / 2); }
+  #bt-object { left: calc(960px - var(--object-size) / 2); top: calc(var(--band-top) + var(--band-height) / 2 - var(--object-size) / 2);
+    width: var(--object-size); height: var(--object-size); border-radius: 50%; }
+  #bt-sentence { position: absolute; left: 0; right: 0; top: 912px; text-align: center;
+    font: 700 var(--text-lead)/1.2 var(--font-sans); color: var(--color-ink); }
+  #bt-source { position: absolute; left: var(--safe-x); bottom: 40px; font: 600 var(--text-source)/1 var(--font-sans); color: var(--color-ink-soft); }
+</style>
+</head>
+<body>
+  <div id="band-title">
+    <div id="bt-band"></div>
+    <div id="bt-left" class="bt-half">복</div>
+    <div id="bt-right" class="bt-half">리</div>
+    <div id="bt-object" class="art-slot">시계 그림 자리<br>(지름 700px)</div>
+    <p id="bt-sentence"><span class="mask"><span class="line">받은 이자까지 합쳐서 <span data-ring="bt-ring">다시 이자</span></span></span></p>
+    <p id="bt-source">수업 자료 슬라이드14</p>
+    <svg class="ring-layer" viewBox="0 0 1920 1080"><path id="bt-ring"/></svg>
+  </div>
+<script src="paper-kit.js"></script>
+<script>
+  // 띠 모양: 위 · 아래 변이 가운데로 갈수록 살짝 안으로 휘는 띠 (70억 프레임의 휜 띠)
+  (function () {
+    const band = document.getElementById("bt-band"), w = band.offsetWidth, h = band.offsetHeight, pts = [];
+    for (let i = 0; i <= 24; i++) { const x = (w * i) / 24, t = (2 * i) / 24 - 1; pts.push([x, 6 * (1 - t * t)]); }
+    for (let i = 24; i >= 0; i--) { const x = (w * i) / 24, t = (2 * i) / 24 - 1; pts.push([x, h - 14 * (1 - t * t)]); }
+    band.style.clipPath = "polygon(" + pts.map(p => p[0].toFixed(1) + "px " + p[1].toFixed(1) + "px").join(",") + ")";
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!doctype html>
+<!--
+  src/parts/subject-label.html — 과목 · 단원 라벨 (역할 칸: 과목 · 단원)
+  크기: 1920×1080, 투명 (영상 내내 같은 자리에 얹는다)
+  모양: 오른쪽 위에 붙인 작은 종이표. 위 · 아래 변이 잘게 찢긴 누런 종이 + 짙은 남색 굵은 글자.
+        (카톡영상_종이질감_568.7초 오른쪽 아래 두 라벨: 누런 종이표 + 굵은 고딕)
+        왼쪽 위 · 오른쪽 아래 모서리는 바탕이 찢겨 있어서 피하고, 오른쪽 위에 둔다.
+  바꾸는 부분: #sl-text 의 글자 (기본 "방과후 경제교육 · 복리")
+  건드리지 않는 것: 자리(right 160px, top 64px) · 글자 크기(40px) · 종이색(--color-tag) · 모든 장면에서 같은 자리
+  따로 움직일 수 있는 조각: #sl-tag-wrap (첫 장면에서 한 번 붙여지고, 그 뒤로는 움직이지 않는다)
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>subject-label</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  #subject-label { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+  #sl-tag-wrap { position: absolute; right: var(--safe-x); top: var(--safe-y); filter: drop-shadow(0 4px 6px rgba(40, 24, 8, 0.28)); }
+  #sl-tag { background: var(--color-tag); padding: 22px 40px; }
+  #sl-text { font: 700 var(--text-label)/1 var(--font-sans); color: var(--color-ink); white-space: nowrap; }
+</style>
+</head>
+<body>
+  <div id="subject-label">
+    <div id="sl-tag-wrap">
+      <div id="sl-tag" data-torn="top bottom" data-torn-amp="6" data-torn-step="9" data-seed="51">
+        <p id="sl-text">방과후 경제교육 · 복리</p>
+      </div>
+    </div>
+  </div>
+<script src="paper-kit.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<!--
+  src/parts/end-card.html — 끝 화면 정리 한 줄 (1주차 nt-end의 새 룩 판. docs/video.md 6-2)
+  크기: 1920×1080, 투명 (bg-paper 위에 얹는다)
+  모양: 크림 바탕 위 가운데 정렬 정리 문장 하나(쪽지 없이 바탕에 바로). 노토 세리프 KR 아주 굵게 96px, 두 줄 이하.
+        핵심 낱말 한 군데에 빨간 손그림 동그라미(선택). 왼쪽 아래에 AI 음성 표기(AI 음성을 쓸 때만).
+  바꾸는 부분: #ec-line-1 · #ec-line-2 의 글 (수업 자료 슬라이드16의 정리 문장 그대로. 뜻이 끊기는 곳에서 줄을 나눈다. 한 줄은 공백 뺀 16자 이하)
+              [data-ring] 이 붙은 span(동그라미 칠 곳 한 군데, 안 칠 거면 data-ring 속성과 #ec-ring을 뺀다)
+              #ec-ai(AI 음성 표기 — AI 음성을 쓰지 않으면 이 줄을 뺀다)
+  건드리지 않는 것: 글 크기(96px, text-end) · 글꼴(노토 세리프 KR 900) · 가운데 정렬 · 동그라미 선(6px)과 여유 · 표기 크기(32px)
+  따로 움직일 수 있는 조각: #ec-line-1 · #ec-line-2(줄마다) · #ec-ring(그려지듯) · #ec-ai
+  머묾: 내레이션이 끝난 뒤 2초 그대로 두고 끝낸다 (docs/motion.md 4-3)
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>end-card</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  #end-card { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+  #ec-text { position: absolute; left: var(--safe-x); right: var(--safe-x); top: 50%; transform: translateY(-50%); text-align: center;
+    font: 900 var(--text-end)/1.25 var(--font-serif); color: var(--color-ink); letter-spacing: -0.02em; }
+  #ec-text p { white-space: nowrap; }
+  #ec-line-2 { margin-top: 40px; }   /* 동그라미가 둘째 줄 글자를 가로지르지 않게 줄 사이를 띄움 */
+  #ec-ai { position: absolute; left: var(--safe-x); bottom: 68px; font: 600 var(--text-source)/1 var(--font-sans); color: var(--color-ink-soft); }
+</style>
+</head>
+<body>
+  <div id="end-card">
+    <div id="ec-text">
+      <p id="ec-line-1"><span class="mask"><span class="line">복리의 마법은 <span data-ring="ec-ring">시간과 꾸준함!</span></span></span></p>
+      <p id="ec-line-2"><span class="mask"><span class="line">일찍 시작할수록 커져요</span></span></p>
+    </div>
+    <p id="ec-ai">이 영상의 목소리는 AI 음성입니다</p>
+    <svg class="ring-layer" viewBox="0 0 1920 1080"><path id="ec-ring"/></svg>
+  </div>
+<script src="paper-kit.js"></script>
+</body>
+</html>
